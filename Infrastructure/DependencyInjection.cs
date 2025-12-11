@@ -1,11 +1,14 @@
 ﻿using Infrastructure.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure;
 
 public static class DependencyInjection
 {
+	private readonly static string _databaseConnectionString = "DatabaseContext";
+
 	public static IServiceCollection AddInfrastucture(this IServiceCollection services, IConfiguration config)
 	{
 		services.AddDatabaseContext(config);
@@ -17,9 +20,18 @@ public static class DependencyInjection
 	{
 		services.AddDbContext<ApplicationDbContext>((so, options) =>
 		{
-			string? connectionString = config 
-		});
+			string? connectionString = config.GetConnectionString(_databaseConnectionString);
 
+			options.UseSqlServer(connectionString,
+				sqlOptions =>
+				{
+					sqlOptions.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
+					sqlOptions.EnableRetryOnFailure(
+						maxRetryCount: 5,
+						maxRetryDelay: TimeSpan.FromSeconds(30),
+						errorNumbersToAdd: null);
+				});
+		});
 
 		return services;
 	}
