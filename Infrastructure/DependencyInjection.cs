@@ -18,7 +18,7 @@ public static class DependencyInjection
 
 	private static IServiceCollection AddDatabaseContext(this IServiceCollection services, IConfiguration config)
 	{
-		services.AddDbContext<ApplicationDbContext>((so, options) =>
+		services.AddDbContext<ApplicationDbContext>( options =>
 		{
 			string? connectionString = config.GetConnectionString(_databaseConnectionString);
 

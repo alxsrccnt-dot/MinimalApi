@@ -15,10 +15,12 @@ internal class SaleOrderLineCommentProfileConfiguration : IEntityTypeConfigurati
 
 		builder.HasOne(x => x.SaleOrder)
 			   .WithMany(x => x.Comments)
-			   .HasForeignKey(x => x.DocID);
+			   .HasForeignKey(x => x.DocID)
+        .OnDelete(DeleteBehavior.NoAction);
 
 		builder.HasOne(x => x.Line)
 			   .WithMany(x => x.Comments)
-			   .HasForeignKey(x => x.LineID);
+			   .HasForeignKey(x => x.LineID)
+		.OnDelete(DeleteBehavior.NoAction);
 	}
 }
