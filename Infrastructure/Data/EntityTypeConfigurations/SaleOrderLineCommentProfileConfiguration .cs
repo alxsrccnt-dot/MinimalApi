@@ -22,5 +22,6 @@ internal class SaleOrderLineCommentProfileConfiguration : IEntityTypeConfigurati
 			   .WithMany(x => x.Comments)
 			   .HasForeignKey(x => x.LineID)
 		.OnDelete(DeleteBehavior.NoAction);
+
 	}
 }

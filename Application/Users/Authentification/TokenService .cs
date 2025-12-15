@@ -4,14 +4,14 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace Application.Services;
+namespace Application.Users.Authentification;
 
-public class JwtService(string key, string issuer, string audience) : IJwtService
+public class TokenService(TokenSettings jwtSettings) : ITokenService
 {
 	public string GenerateJwtToken(User user)
 	{
-		var tkey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
-		var creds = new SigningCredentials(tkey, SecurityAlgorithms.HmacSha256);
+		var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Secret));
+		var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
 		var claims = new[]
 		{
@@ -20,10 +20,10 @@ public class JwtService(string key, string issuer, string audience) : IJwtServic
 		};
 
 		var token = new JwtSecurityToken(
-			issuer: issuer,
-			audience: audience,
+			issuer: jwtSettings.Issuer,
+			audience: jwtSettings.Audience,
 			claims: claims,
-			expires: DateTime.UtcNow.AddHours(1),
+			expires: DateTime.UtcNow.AddMinutes(jwtSettings.ExpirationInMinutes),
 			signingCredentials: creds);
 
 		return new JwtSecurityTokenHandler().WriteToken(token);

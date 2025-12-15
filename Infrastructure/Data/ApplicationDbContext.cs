@@ -10,6 +10,8 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
 	public DbSet<BPType> BPTypes { get; set; }
 	public DbSet<BusinessPartner> BusinessPartners { get; set; }
 	public DbSet<Item> Items { get; set; }
+	public DbSet<Order> Orders { get; set; }
+	public DbSet<OrderLine> OrderLines { get; set; }
 	public DbSet<SaleOrder> SaleOrders { get; set; }
 	public DbSet<SaleOrderLine> SaleOrderLines { get; set; }
 	public DbSet<SaleOrderLineComment> SaleOrderLineComments { get; set; }

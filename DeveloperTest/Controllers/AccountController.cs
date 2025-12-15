@@ -1,4 +1,4 @@
-﻿using Application.Authentification;
+﻿using Application.Users.Authentification;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,8 +11,13 @@ public class AccountController(IMediator mediator) : Controller
 	[HttpPost("login")]
 	public async Task<IActionResult> Login(AuthenticationRequest request)
 	{
-		string token = await mediator.Send(new GetSecurityTokenCommand(request));
-
-		return string.IsNullOrEmpty(token) ? Ok(token) : BadRequest();
+		try
+		{
+			var token = await mediator.Send(new GetSecurityTokenCommand(request));
+			return Ok(token);
+		}catch (Exception ex)
+		{
+			return BadRequest(ex.Message);
+		}
 	}
 }

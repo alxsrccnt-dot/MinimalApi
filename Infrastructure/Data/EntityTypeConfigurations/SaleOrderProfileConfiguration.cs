@@ -8,14 +8,14 @@ public class SaleOrderProfileConfiguration : IEntityTypeConfiguration<SaleOrder>
 {
 	public void Configure(EntityTypeBuilder<SaleOrder> builder)
 	{
-		builder.HasKey(x => x.ID);
+		//builder.HasKey(x => x.ID);
 
-		builder.Property(x => x.BPCode)
-			   .HasMaxLength(128)
-			   .IsRequired();
+		//builder.Property(x => x.BPCode)
+		//	   .HasMaxLength(128)
+		//	   .IsRequired();
 
-		builder.Property(x => x.CreateDate)
-			   .IsRequired();
+		//builder.Property(x => x.CreateDate)
+		//	   .IsRequired();
 
 		builder.HasOne(x => x.BusinessPartner)
 			   .WithMany(x => x.SaleOrders)
