@@ -10,11 +10,22 @@ public class DocumentsEndpoints : ICarterModule
 		var group = app.MapGroup("/api/documents")
 			.RequireAuthorization();
 
-		group.MapGet("/sales", () => GetOrders).WithName(nameof(GetOrders));
+		group.MapGet("", GetOrders)
+			.WithName(nameof(GetOrders));
 
 	}
 
 	public static async Task<IResult> GetOrders(GetDocumentsRequest request)
+	{
+		return Results.Ok("Orders retrieved successfully.");
+	}
+
+	public static async Task<IResult> UpdateOrders(GetDocumentsRequest request)
+	{
+		return Results.Ok("Orders retrieved successfully.");
+	}
+
+	public static async Task<IResult> DeleteOrders(GetDocumentsRequest request)
 	{
 		return Results.Ok("Orders retrieved successfully.");
 	}

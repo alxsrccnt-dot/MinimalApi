@@ -1,4 +1,4 @@
-﻿namespace Application.Items.ReadItems;
+﻿namespace Application.Items.Read;
 
 public enum FilterByItemsColumn
 {

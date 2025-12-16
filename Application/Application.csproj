@@ -23,4 +23,11 @@
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Documents\Delete\" />
+    <Folder Include="Documents\Create\" />
+    <Folder Include="Documents\Update\" />
+    <Folder Include="Documents\Read\" />
+  </ItemGroup>
+
 </Project>

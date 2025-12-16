@@ -1,5 +1,5 @@
 ﻿using Application.Common;
-using Application.Items.ReadItems;
+using Application.Items.Read;
 using Carter;
 using MediatR;
 
@@ -24,7 +24,10 @@ public class ItemsEndpoint : ICarterModule
 	{
 		var readItemsRequest = new PaginatedRequest<FilterByItemsColumn>
 		{
-			FilterByColumn = FilterByItemsColumn.ItemCode
+			FilterByColumn = filterByColumn is not null ? filterByColumn.Value : FilterByItemsColumn.None,
+			FilterValue = filterValue,
+			PageNumber = pageNumber,
+			PageSize = pageSize
 		};
 		var paginedDto = await mediator.Send(new ReadItemsCommand(readItemsRequest));
 

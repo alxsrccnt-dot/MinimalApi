@@ -15,7 +15,8 @@ public class AccountController(IMediator mediator) : Controller
 		{
 			var token = await mediator.Send(new GetSecurityTokenCommand(request));
 			return Ok(token);
-		}catch (Exception ex)
+		}
+		catch (Exception ex)
 		{
 			return BadRequest(ex.Message);
 		}
