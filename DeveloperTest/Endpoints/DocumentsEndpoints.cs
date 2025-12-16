@@ -1,5 +1,8 @@
 ﻿using Application.Documents;
+using Application.Documents.Delete;
 using Carter;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DeveloperTest.Endpoints;
 
@@ -38,8 +41,7 @@ public class DocumentsEndpoints : ICarterModule
 		return Results.Ok("Orders retrieved successfully.");
 	}
 
-	public async Task<IResult> DeleteOrders()
-	{
-		return Results.Ok("Orders retrieved successfully.");
-	}
+	public async Task<IResult> DeleteOrders(int id, [FromServices] IMediator mediator)
+		=> await mediator.Send(new DeleteOrderCommand(id))
+			.ContinueWith(_ => Results.Ok($"Order with Id {id} deleted successfully."));
 }
