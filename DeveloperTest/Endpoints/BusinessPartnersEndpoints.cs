@@ -9,8 +9,8 @@ public class BusinessPartnersEndpoints : ICarterModule
 {
 	public void AddRoutes(IEndpointRouteBuilder app)
 	{
-		var group = app.MapGroup("/api/businessPartners")
-			   .RequireAuthorization();
+		var group = app.MapGroup("/api/business-partners");
+		//.RequireAuthorization();
 
 		group.MapGet("", GetBusinessPartners)
 			.WithName(nameof(GetBusinessPartners));

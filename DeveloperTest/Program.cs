@@ -12,6 +12,9 @@ builder.Services.AddWebServices(builder.Configuration);
 builder.Services.AddApplication(builder.Configuration);
 builder.Services.AddInfrastucture(builder.Configuration);
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -21,8 +24,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.MapOpenApi();
-app.UseSwaggerUI();
 
 app.UseAuthentication();
 app.UseAuthorization();

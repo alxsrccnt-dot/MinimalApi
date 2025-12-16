@@ -2,6 +2,7 @@
 using Application.Items.Read;
 using Carter;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DeveloperTest.Endpoints;
 
@@ -9,14 +10,13 @@ public class ItemsEndpoint : ICarterModule
 {
 	public void AddRoutes(IEndpointRouteBuilder app)
 	{
-		var group = app.MapGroup("/api/items")
-			   .RequireAuthorization();
+		var group = app.MapGroup("/api/items");
 
 		group.MapGet("", GetItems)
 			.WithName(nameof(GetItems));
 	}
 
-	public async Task<IResult> GetItems(IMediator mediator,
+	public async Task<IResult> GetItems([FromServices] IMediator mediator,
 			FilterByItemsColumn? filterByColumn,
 			string? filterValue,
 			int pageNumber = 1,
