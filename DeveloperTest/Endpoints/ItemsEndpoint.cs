@@ -29,7 +29,7 @@ public class ItemsEndpoint : ICarterModule
 			PageNumber = pageNumber,
 			PageSize = pageSize
 		};
-		var paginedDto = await mediator.Send(new ReadItemsCommand(readItemsRequest));
+		var paginedDto = await mediator.Send(new ReadDocumentsCommand(readItemsRequest));
 
 		if (paginedDto.IsEmpty())
 			return Results.NotFound("No items found.");

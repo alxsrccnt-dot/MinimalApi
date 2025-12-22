@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Application.Documents.Read;
 
-namespace Application.Documents.Read
+public enum FilterByOrdersColumn
 {
-	internal class FilterByOrdersColumn
-	{
-	}
+	None,
+	BPCode,
+	CreateDate,
+	LastUpdateDate,
+	CreatedBy
 }

@@ -1,4 +1,5 @@
 ﻿using Application.Documents;
+using Application.Documents.Create;
 using Application.Documents.Delete;
 using Carter;
 using MediatR;
@@ -31,10 +32,11 @@ public class DocumentsEndpoints : ICarterModule
 		return Results.Ok("Orders retrieved successfully.");
 	}
 
-	public async Task<IResult> CreateOrders()
-	{
-		return Results.Ok("Orders retrieved successfully.");
-	}
+	public async Task<IResult> CreateOrders(
+		[FromBody]CreateDocumentRequest request,
+		[FromServices] IMediator mediator)
+		=> await mediator.Send(new CreateDocumentCommand(request))
+			.ContinueWith(_ => Results.Ok("Order created successfully."));
 
 	public async Task<IResult> UpdateOrders()
 	{

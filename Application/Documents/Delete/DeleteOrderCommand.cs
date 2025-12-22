@@ -2,6 +2,4 @@
 
 namespace Application.Documents.Delete;
 
-public record DeleteOrderCommand(int Id) : IRequest
-{
-}
+public record DeleteOrderCommand(int Id) : IRequest;

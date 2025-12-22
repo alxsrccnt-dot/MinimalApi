@@ -3,4 +3,4 @@ using MediatR;
 
 namespace Application.Items.Read;
 
-public record ReadItemsCommand(PaginatedRequest<FilterByItemsColumn> ReadItemsRequest) : IRequest<PaginatedResultDto<ItemDto>>;
+public record ReadDocumentsCommand(PaginatedRequest<FilterByItemsColumn> ReadItemsRequest) : IRequest<PaginatedResultDto<OrderDto>>;

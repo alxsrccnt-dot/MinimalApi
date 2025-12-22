@@ -1,5 +1,7 @@
-﻿namespace Application.Documents;
+﻿using Application.Common;
+using Application.Documents.Read;
+using MediatR;
 
-public class GetDocumentsRequest
-{
-}
+namespace Application.Documents;
+
+public class GetDocumentsRequest(PaginatedRequest<FilterByOrdersColumn> request) : IRequest;

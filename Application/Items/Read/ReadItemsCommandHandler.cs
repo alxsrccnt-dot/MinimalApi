@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Items.ReadItems;
 
-public class ReadIBusinessPartnersCommandHandler(ApplicationDbContext context) : IRequestHandler<ReadItemsCommand, PaginatedResultDto<ItemDto>>
+public class ReadItemsCommandHandler                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        (ApplicationDbContext context) : IRequestHandler<ReadDocumentsCommand, PaginatedResultDto<OrderDto>>
 {
-	public async Task<PaginatedResultDto<ItemDto>> Handle(ReadItemsCommand command, CancellationToken cancellationToken)
+	public async Task<PaginatedResultDto<OrderDto>> Handle(ReadDocumentsCommand command, CancellationToken cancellationToken)
 	{
 		var searchInfo = command.ReadItemsRequest;
 		var itemsQuery = context.Items.AsQueryable();
@@ -30,10 +30,10 @@ public class ReadIBusinessPartnersCommandHandler(ApplicationDbContext context) :
 
 		var totalCount = await itemsQuery.CountAsync(cancellationToken);
 		var itemsDtos = await itemsQuery
-			.Select(item => new ItemDto(item.ItemCode, item.ItemName, item.Active))
+			.Select(item => new OrderDto(item.ItemCode, item.ItemName, item.Active))
 			.ToListAsync(cancellationToken);
 
-		return new PaginatedResultDto<ItemDto>
+		return new PaginatedResultDto<OrderDto>
 		{
 			Data = itemsDtos,
 			TotalCount = totalCount,

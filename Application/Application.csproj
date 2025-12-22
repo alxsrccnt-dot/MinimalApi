@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Documents\Create\" />
     <Folder Include="Documents\Update\" />
   </ItemGroup>
 
