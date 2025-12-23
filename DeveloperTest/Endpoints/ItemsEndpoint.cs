@@ -10,7 +10,8 @@ public class ItemsEndpoint : ICarterModule
 {
 	public void AddRoutes(IEndpointRouteBuilder app)
 	{
-		var group = app.MapGroup("/api/items");
+		var group = app.MapGroup("/api/items")
+			.RequireAuthorization();
 
 		group.MapGet("", GetItems)
 			.WithName(nameof(GetItems));

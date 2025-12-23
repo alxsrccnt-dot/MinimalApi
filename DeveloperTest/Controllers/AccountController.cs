@@ -1,5 +1,6 @@
 ﻿using Application.Users.Authentification;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DeveloperTest.Controllers;
@@ -8,17 +9,11 @@ namespace DeveloperTest.Controllers;
 [Route("api/account")]
 public class AccountController(IMediator mediator) : Controller
 {
+	[AllowAnonymous]
 	[HttpPost("login")]
 	public async Task<IActionResult> Login(AuthenticationRequest request)
 	{
-		try
-		{
-			var token = await mediator.Send(new GetSecurityTokenCommand(request));
-			return Ok(token);
-		}
-		catch (Exception ex)
-		{
-			return BadRequest(ex.Message);
-		}
+		var token = await mediator.Send(new GetSecurityTokenCommand(request));
+		return Ok(token);
 	}
 }

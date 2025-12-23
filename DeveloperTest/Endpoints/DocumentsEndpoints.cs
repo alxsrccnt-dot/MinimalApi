@@ -11,8 +11,8 @@ public class DocumentsEndpoints : ICarterModule
 {
 	public void AddRoutes(IEndpointRouteBuilder app)
 	{
-		var group = app.MapGroup("/api/documents");
-		//.RequireAuthorization();
+		var group = app.MapGroup("/api/documents")
+			.RequireAuthorization();
 
 		group.MapGet("", GetOrders)
 			.WithName(nameof(GetOrders));

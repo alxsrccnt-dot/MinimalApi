@@ -1,5 +1,4 @@
 ﻿using Application.Common.Exceptions;
-using Application.Exceptions;
 using Infrastructure.Data;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -14,14 +13,13 @@ public class GetSecurityTokenCommandHandler(ApplicationDbContext context, IToken
 			.AsNoTracking()
 			.FirstOrDefaultAsync(u =>
 				u.UserName == command.request.Username &&
-				u.Password == command.request.Password &&
-				u.Active);
+				u.Password == command.request.Password);
 
 		if (user == null)
 			throw new NotFoundException("Invalid username or password.");
 
 		if (!user.Active)
-			throw new InactiveUserException();
+			throw new InactiveException("This user is innactive.");
 
 		return jwtService.GenerateJwtToken(user);
 	}
