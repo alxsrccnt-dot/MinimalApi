@@ -1,8 +1,7 @@
 using Application;
-using Application.Common.Exceptions;
 using Carter;
-using DeveloperTest;
-using DeveloperTest.Infrastructure;
+using MainApi;
+using MainApi.Infrastructure;
 using Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,10 +26,6 @@ if (app.Environment.IsDevelopment())
 	app.UseSwagger();
 	app.UseSwaggerUI();
 }
-app.MapGet("/test-exception", () =>
-{
-	throw new NotFoundException("This should hit the handler");
-});
 
 app.UseHttpsRedirection();
 

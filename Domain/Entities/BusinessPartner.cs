@@ -1,15 +1,12 @@
-﻿using Domain.Entities.Orders;
+﻿using Domain.Entities.Base;
+using Domain.Entities.Orders;
 
 namespace Domain.Entities;
 
-public class BusinessPartner
+public class BusinessPartner : Entity<int>
 {
-	public string BPCode { get; set; } = null!;
-	public string BPName { get; set; } = null!;
-	public string BPType { get; set; } = null!;
-	public bool Active { get; set; } = true;
+	public string Code { get; set; } = null!;
+	public string Name { get; set; } = null!;
 
-	public BPType Type { get; set; } = null!;
-	public ICollection<SaleOrder>? SaleOrders { get; set; }
-	public ICollection<PurchaseOrder>? PurchaseOrders { get; set; }
+	public ICollection<Order>? Orders { get; set; }
 }

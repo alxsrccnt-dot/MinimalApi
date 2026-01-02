@@ -8,25 +8,15 @@ internal class BusinessPartnerProfileConfiguration : IEntityTypeConfiguration<Bu
 {
 	public void Configure(EntityTypeBuilder<BusinessPartner> builder)
 	{
-		builder.HasKey(x => x.BPCode);
+		builder.HasKey(x => x.Id);
 
-		builder.Property(x => x.BPCode)
-			   .HasMaxLength(128);
+		builder.Property(x => x.Code)
+			   .HasMaxLength(128)
+			   .IsRequired();
+		builder.HasIndex(x => x.Code);
 
-		builder.Property(x => x.BPName)
+		builder.Property(x => x.Name)
 			   .HasMaxLength(254)
 			   .IsRequired();
-
-		builder.Property(x => x.BPType)
-			   .HasMaxLength(1)
-			   .IsRequired();
-
-		builder.Property(x => x.Active)
-			   .HasDefaultValue(true);
-
-		builder.HasOne(x => x.Type)
-			   .WithMany(x => x.BusinessPartners)
-			   .HasForeignKey(x => x.BPType)
-			   .OnDelete(DeleteBehavior.Restrict);
 	}
 }

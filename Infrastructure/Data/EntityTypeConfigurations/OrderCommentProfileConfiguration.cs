@@ -4,19 +4,21 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Data.EntityTypeConfigurations;
 
-internal class OrderProfileConfiguration : IEntityTypeConfiguration<Order>
+internal class OrderCommentProfileConfiguration : IEntityTypeConfiguration<OrderComment>
 {
-	public void Configure(EntityTypeBuilder<Order> builder)
+	public void Configure(EntityTypeBuilder<OrderComment> builder)
 	{
 		builder.HasKey(x => x.Id);
 
-		builder.Property(x => x.CreatedBy)
-			   .HasMaxLength(100)
+		builder.Property(x => x.Comment)
 			   .IsRequired();
 
-		builder.HasOne(x => x.BusinessPartner)
-			   .WithMany(x => x.Orders)
-			   .HasForeignKey(x => x.BusinessPartnerId)
+		builder.Property(x => x.CreatedBy)
+			   .IsRequired();
+
+		builder.HasOne(x => x.Order)
+			   .WithOne(x => x.Comment)
+			   .HasForeignKey<OrderComment>(x => x.OrderID)
 			   .OnDelete(DeleteBehavior.NoAction);
 	}
 }

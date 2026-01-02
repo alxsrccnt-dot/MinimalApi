@@ -2,8 +2,10 @@
 using Application.Common;
 using Carter;
 using MediatR;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 
-namespace DeveloperTest.Endpoints;
+namespace MainApi.Endpoints;
 
 public class BusinessPartnersEndpoints : ICarterModule
 {
@@ -14,6 +16,12 @@ public class BusinessPartnersEndpoints : ICarterModule
 
 		group.MapGet("", GetBusinessPartners)
 			.WithName(nameof(GetBusinessPartners));
+
+		group.MapPost("", AddBusinessPartners)
+			.WithName(nameof(AddBusinessPartners));
+
+		group.MapPut("", UpdateBusinessPartners)
+			.WithName(nameof(UpdateBusinessPartners));
 	}
 
 	public async Task<IResult> GetBusinessPartners(IMediator mediator,
@@ -35,5 +43,15 @@ public class BusinessPartnersEndpoints : ICarterModule
 			return Results.NotFound("No business partner found.");
 
 		return Results.Ok(paginedDto);
+	}
+
+	public async Task<IResult> AddBusinessPartners(IMediator mediator)
+	{
+		return Results.Ok("New bussines partener added.");
+	}
+
+	public async Task<IResult> UpdateBusinessPartners(IMediator mediator)
+	{
+		return Results.Ok("Bussines partener updated.");
 	}
 }

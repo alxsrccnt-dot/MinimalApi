@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using System.Text;
 
-namespace DeveloperTest.Infrastructure;
+namespace MainApi.Infrastructure;
 
 public class GlobalExceptionHandler : IExceptionHandler
 {

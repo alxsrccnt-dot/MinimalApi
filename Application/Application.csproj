@@ -25,6 +25,8 @@
 
   <ItemGroup>
     <Folder Include="Documents\Update\" />
+    <Folder Include="DTOs\" />
+    <Folder Include="Queries\" />
   </ItemGroup>
 
 </Project>

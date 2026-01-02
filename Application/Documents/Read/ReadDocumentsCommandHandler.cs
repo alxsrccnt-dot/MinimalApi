@@ -1,10 +1,9 @@
 ﻿using Application.Common;
-using Application.Documents.Read;
 using Infrastructure.Data;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Items.ReadItems;
+namespace Application.Documents.Read;
 
 public class ReadDocumentsCommandHandler(ApplicationDbContext context) : IRequestHandler<ReadDocumentsCommand, PaginatedResultDto<OrderDto>>
 {
@@ -19,13 +18,12 @@ public class ReadDocumentsCommandHandler(ApplicationDbContext context) : IReques
 			? ordersQuery
 			: searchInfo.FilterByColumn switch
 			{
-				FilterByOrdersColumn.BPCode => ordersQuery.Where(i => i.BPCode == filterValue),
-				FilterByOrdersColumn.CreatedBy => ordersQuery.Where(i => i.CreatedBy == Int32.Parse(filterValue)),
-				FilterByOrdersColumn.CreateDate => ordersQuery.Where(i => i.CreateDate.ToString() == filterValue) //to do
+				FilterByOrdersColumn.CreatedBy => ordersQuery.Where(i => i.CreatedBy == filterValue),
+				FilterByOrdersColumn.CreateDate => ordersQuery.Where(i => i.CreateAt.ToString() == filterValue) //to do
 			};
 
 		ordersQuery = 
-			ordersQuery.OrderBy(i => i.CreateDate)
+			ordersQuery.OrderBy(i => i.CreateAt)
 			.Skip(searchInfo.PageSize * searchInfo.PageNumber)
 			.Take(searchInfo.PageNumber);
 

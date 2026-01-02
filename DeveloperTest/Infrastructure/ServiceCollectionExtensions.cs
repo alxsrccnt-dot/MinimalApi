@@ -1,9 +1,9 @@
-﻿using Application.Users.Authentification;
+﻿using MainApi.Infrastructure.Token;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace DeveloperTest.Infrastructure;
+namespace MainApi.Infrastructure;
 
 public static class ServiceCollectionExtensions
 {

@@ -17,20 +17,18 @@ public class ReadIBusinessPartnersCommandHandler(ApplicationDbContext context) :
 			? businessPartnersQuery
 			: searchInfo.FilterByColumn switch
 			{
-				FilterByBusinessPartnersColumn.BPCode => businessPartnersQuery.Where(bp => bp.BPCode == filterValue),
-				FilterByBusinessPartnersColumn.BPName => businessPartnersQuery.Where(bp => bp.BPName == filterValue),
-				FilterByBusinessPartnersColumn.BPType => businessPartnersQuery.Where(bp => bp.BPType == filterValue),
-				FilterByBusinessPartnersColumn.Active => businessPartnersQuery.Where(bp => bp.Active) //to do
+				FilterByBusinessPartnersColumn.BPCode => businessPartnersQuery.Where(bp => bp.Code == filterValue),
+				FilterByBusinessPartnersColumn.BPName => businessPartnersQuery.Where(bp => bp.Name == filterValue),
 			};
 
 		businessPartnersQuery = 
-			businessPartnersQuery.OrderBy(i => i.BPCode)
+			businessPartnersQuery.OrderBy(i => i.Code)
 			.Skip(searchInfo.PageSize * searchInfo.PageNumber)
 			.Take(searchInfo.PageNumber);
 
 		var totalCount = await businessPartnersQuery.CountAsync(cancellationToken);
 		var businessPartnersDtos = await businessPartnersQuery
-			.Select(businessPartner => new BusinessPartnerDto(businessPartner.BPCode, businessPartner.BPName, businessPartner.BPType, businessPartner.Active))
+			.Select(businessPartner => new BusinessPartnerDto(businessPartner.Code, businessPartner.Name))
 			.ToListAsync(cancellationToken);
 
 		return new PaginatedResultDto<BusinessPartnerDto>

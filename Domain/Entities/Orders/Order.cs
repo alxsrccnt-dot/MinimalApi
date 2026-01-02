@@ -2,15 +2,15 @@
 
 namespace Domain.Entities.Orders;
 
-public abstract class Order : BaseEntity
+public class Order : BaseEntity<int>
 {
-	public string BPCode { get; set; } = null!;
-	public DateTime CreateDate { get; set; }
-	public DateTime? LastUpdateDate { get; set; }
-	public int CreatedBy { get; set; }
-	public int? LastUpdatedBy { get; set; }
-
+	public int BusinessPartnerId { get; set; }
 	public BusinessPartner? BusinessPartner { get; set; }
-	public User? Creator { get; set; }
-	public User? Updater { get; set; }
+	
+	public decimal TotalAmount { get; set; } 
+	
+	public ICollection<OrderLine>? OrderLines { get; set; } = [];
+	public OrderComment? Comment { get; set; }
+
+	public void SetTotalAmount() => TotalAmount = OrderLines?.Sum(ol => ol.GetTotalPrice()) ?? 0;
 }

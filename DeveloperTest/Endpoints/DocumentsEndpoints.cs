@@ -1,11 +1,10 @@
-﻿using Application.Documents;
-using Application.Documents.Create;
+﻿using Application.Documents.Create;
 using Application.Documents.Delete;
 using Carter;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DeveloperTest.Endpoints;
+namespace MainApi.Endpoints;
 
 public class DocumentsEndpoints : ICarterModule
 {

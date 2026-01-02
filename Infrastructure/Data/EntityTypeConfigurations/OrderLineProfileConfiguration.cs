@@ -8,18 +8,19 @@ internal class OrderLineProfileConfiguration : IEntityTypeConfiguration<OrderLin
 {
 	public void Configure(EntityTypeBuilder<OrderLine> builder)
 	{
-		builder.HasKey(x => x.LineID);
+		builder.HasKey(x => x.Id);
+
+		builder.Property(x => x.CreatedBy)
+			   .HasMaxLength(100)
+			   .IsRequired();
 
 		builder.HasDiscriminator<string>("OrderLineType")
-			   .HasValue<PurchaseOrderLine>("PurchaseOrderLine")
-			   .HasValue<SaleOrderLine>("SaleOrderLine");	
+			   .HasValue<LicensedOrderLine>("LicensedOrderLine")
+			   .HasValue<PhysicalOrderline>("PhysicalOrderline");	
 
-		builder.Property(x => x.Quantity)
-			   .HasColumnType("DECIMAL(38,18)")
-			   .IsRequired();
-
-		builder.Property(x => x.ItemCode)
-			   .HasMaxLength(128)
-			   .IsRequired();
+		builder.HasOne(x => x.Order)
+			   .WithMany(x => x.OrderLines)
+			   .HasForeignKey(x => x.OrderID)
+			   .OnDelete(DeleteBehavior.NoAction);
 	}
 }

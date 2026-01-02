@@ -1,3 +1,3 @@
 ﻿namespace Application.Items.Read;
 
-public record OrderDto(string ItemCode, string ItemName, bool Active);
+public record ProductDto(string Code, string Title, string Description);

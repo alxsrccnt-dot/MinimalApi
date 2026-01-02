@@ -1,18 +1,11 @@
-﻿namespace Domain.Entities.Orders;
+﻿using Domain.Entities.Base;
 
-public abstract class OrderLine
-{
-	public int LineID { get; set; }
-	public int DocID { get; set; }
-	public string ItemCode { get; set; } = null!;
-	public decimal Quantity { get; set; }
-	public DateTime CreateDate { get; set; }
-	public DateTime? LastUpdateDate { get; set; }
-	public int CreatedBy { get; set; }
-	public int? LastUpdatedBy { get; set; }
+namespace Domain.Entities.Orders;
 
-	public PurchaseOrder? PurchaseOrder { get; set; }
-	public Item? Item { get; set; }
-	public User? Creator { get; set; }
-	public User? Updater { get; set; }
+public abstract class OrderLine : BaseEntity<int>
+{ 
+	public int OrderID { get; set; }
+	public Order Order { get; set; }
+
+	public abstract decimal GetTotalPrice();
 }

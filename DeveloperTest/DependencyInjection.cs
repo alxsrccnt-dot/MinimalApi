@@ -1,6 +1,6 @@
-﻿using DeveloperTest.Infrastructure;
+﻿using MainApi.Infrastructure;
 
-namespace DeveloperTest;
+namespace MainApi;
 
 public static class DependencyInjection
 {
