@@ -9,6 +9,11 @@ internal class OrderProfileConfiguration : IEntityTypeConfiguration<Order>
 	public void Configure(EntityTypeBuilder<Order> builder)
 	{
 		builder.HasKey(x => x.Id);
+		builder.Property(x => x.CreatedBy)
+			   .HasMaxLength(50)
+			   .IsRequired();
+		builder.Property(x => x.CreateAt)
+			   .IsRequired();
 
 		builder.Property(x => x.CreatedBy)
 			   .HasMaxLength(100)

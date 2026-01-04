@@ -2,4 +2,4 @@
 
 namespace Application.Commands.Products.Create;
 
-public record CreateProductCommand() : IRequest;
+public record CreateProductCommand(CreateProductRequest Request) : IRequest;

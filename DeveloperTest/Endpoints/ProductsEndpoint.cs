@@ -1,7 +1,6 @@
 ﻿using Application.Commands.Products.Create;
 using Application.Common;
-using Application.Items.Create;
-using Application.Items.Read;
+using Application.Queries.Items.Read;
 using Carter;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -51,9 +50,9 @@ public class ProductsEndpoint : ICarterModule
 	}
 
 	public async Task<IResult> AddItem([FromServices] IMediator mediator,
-		[FromBody]CreateItemRequest request)
+		[FromBody]CreateProductRequest request)
 	{
-		await mediator.Send(new CreateProductCommand());
+		await mediator.Send(new CreateProductCommand(request));
 		return Results.Ok("Item was added.");
 	}
 

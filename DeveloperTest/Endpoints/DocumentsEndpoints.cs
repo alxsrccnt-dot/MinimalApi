@@ -1,5 +1,5 @@
-﻿using Application.Documents.Create;
-using Application.Documents.Delete;
+﻿using Application.Commands.Orders.Create;
+using Application.Commands.Orders.Delete;
 using Carter;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

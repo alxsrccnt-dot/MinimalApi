@@ -20,7 +20,6 @@ internal class LicenseProfileConfiguration : IEntityTypeConfiguration<License>
 
 		builder.HasOne(x => x.LicensedProduct)
 			   .WithMany(x => x.Licenses)
-			   .HasForeignKey(x => x.LicensedProductId)
-			   .IsRequired();
+			   .HasForeignKey(x => x.LicensedProductId);
 	}
 }

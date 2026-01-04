@@ -2,14 +2,16 @@
 
 namespace Domain.Entities.Product;
 
-public abstract class Product : Entity<int>
+public abstract class Product(string code, string title, string description, int price, int categoryId) : BaseEntity<int>
 {
-	//make code unique
-	public string Code { get; set; } = null!;
-	public string Title { get; set; } = null!;
-	public string Description { get; set; } = null!;
-	public int Price { get; set; }
+	public string Code { get; set; } = code;
+	public string Title { get; set; } = title;
+	public string Description { get; set; } = description;
+	public int Price { get; set; } = price;
 	public bool IsActive { get; set; }
+
+	public int CategoryId { get; set; } = categoryId;
+	public Category Category{ get; set; } = null!;
 
 	public ICollection<Rating> Ratings { get; set; } = null!;
 }

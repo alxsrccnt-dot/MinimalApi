@@ -3,7 +3,7 @@ using Domain.Enums;
 
 namespace Domain.Entities.Product;
 
-public class Rating : Entity<int>
+public class Rating : BaseEntity<int>
 {
 	public RaitingScoreValues Score { get; set; }
 	public string Comment { get; set; } = null!;

@@ -11,11 +11,11 @@ internal class InventoryProfileConfiguration : IEntityTypeConfiguration<Inventor
 		builder.HasKey(i => new { i.PhysicalProductId, i.WarehouseId });
 
 		builder.HasOne(i => i.PhysicalProduct)
-			.WithMany(p => p.Inventories)
-			.HasForeignKey(i => i.PhysicalProductId);
+			   .WithMany(p => p.Inventories)
+			   .HasForeignKey(i => i.PhysicalProductId);
 
 		builder.HasOne(i => i.Warehouse)
-			.WithMany(w => w.Inventories)
-			.HasForeignKey(i => i.WarehouseId);
+			   .WithMany(w => w.Inventories)
+			   .HasForeignKey(i => i.WarehouseId);
 	}
 }

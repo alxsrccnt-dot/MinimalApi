@@ -11,6 +11,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
 
 	public DbSet<License> Licenses { get; set; }
 	public DbSet<Product> Products { get; set; }
+	public DbSet<Category> Categories { get; set; }
 	public DbSet<Rating> Raitings { get; set; }
 	public DbSet<Warehouse> Warehouses { get; set; }
 	public DbSet<Inventory> Inventories { get; set; }

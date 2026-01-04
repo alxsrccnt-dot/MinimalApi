@@ -9,6 +9,11 @@ internal class OrderCommentProfileConfiguration : IEntityTypeConfiguration<Order
 	public void Configure(EntityTypeBuilder<OrderComment> builder)
 	{
 		builder.HasKey(x => x.Id);
+		builder.Property(x => x.CreatedBy)
+			   .HasMaxLength(50)
+			   .IsRequired();
+		builder.Property(x => x.CreateAt)
+			   .IsRequired();
 
 		builder.Property(x => x.Comment)
 			   .IsRequired();

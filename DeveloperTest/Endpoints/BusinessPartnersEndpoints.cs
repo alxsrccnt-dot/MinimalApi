@@ -1,9 +1,7 @@
-﻿using Application.BusinessPartners.Read;
-using Application.Common;
+﻿using Application.Common;
+using Application.Queries.BusinessPartners.Read;
 using Carter;
 using MediatR;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
 
 namespace MainApi.Endpoints;
 

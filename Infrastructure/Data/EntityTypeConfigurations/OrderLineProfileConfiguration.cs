@@ -9,9 +9,10 @@ internal class OrderLineProfileConfiguration : IEntityTypeConfiguration<OrderLin
 	public void Configure(EntityTypeBuilder<OrderLine> builder)
 	{
 		builder.HasKey(x => x.Id);
-
 		builder.Property(x => x.CreatedBy)
-			   .HasMaxLength(100)
+			   .HasMaxLength(50)
+			   .IsRequired();
+		builder.Property(x => x.CreateAt)
 			   .IsRequired();
 
 		builder.HasDiscriminator<string>("OrderLineType")
