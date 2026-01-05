@@ -19,7 +19,8 @@ public class CreateProductCommandHandler(ApplicationDbContext context) : IReques
 		};
 		product.CreateAt = DateTime.UtcNow;
 		product.CreatedBy = "test";//todo get user from context
-		context.Products.Add(product);
-		await context.SaveChangesAsync();
+
+		await context.Products.AddAsync(product, cancellationToken);
+		await context.SaveChangesAsync(cancellationToken);
 	}
 }

@@ -1,5 +1,5 @@
-﻿namespace Application.Commands.Licenses.Create;
+﻿using MediatR;
 
-internal class CreateLicenseCommand
-{
-}
+namespace Application.Commands.Licenses.Create;
+
+public record CreateLicenseCommand(CreateLicenseRequest Request) : IRequest;

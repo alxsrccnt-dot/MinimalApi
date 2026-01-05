@@ -2,4 +2,4 @@
 
 namespace Application.Commands.Categories.Create;
 
-public class CreateCategoryRequest(string title) : BaseCreateOrUpdateCategoryRequest(title) { }
+public class CreateCategoryRequest(string title) : CreateOrUpdateCategoryRequest(title) { }

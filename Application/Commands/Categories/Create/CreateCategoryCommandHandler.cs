@@ -1,4 +1,5 @@
-﻿using Domain.Entities.Product;
+﻿using Application.Common.Exceptions;
+using Domain.Entities.Product;
 using Infrastructure.Data;
 using MediatR;
 
@@ -9,10 +10,18 @@ public class CreateCategoryCommandHandler(ApplicationDbContext context) : IReque
 	public async Task Handle(CreateCategoryCommand command, CancellationToken cancellationToken)
 	{
 		var request = command.Request;
+
+		if (string.IsNullOrWhiteSpace(request.Title))
+			throw new ValidationException(new List<string>()
+			{
+				"Category title cannot be empty."
+			});
+
 		var category = new Category(request.Title);
 		category.CreateAt = DateTime.UtcNow;
 		category.CreatedBy = "test";//todo get user from context
-		await context.Categories.AddAsync(category);
-		await context.SaveChangesAsync();
+
+		await context.Categories.AddAsync(category, cancellationToken);
+		await context.SaveChangesAsync(cancellationToken);
 	}
 }

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MainApi.Endpoints;
 
-public class DocumentsEndpoints : ICarterModule
+public class OrdersEndpoints : ICarterModule
 {
 	public void AddRoutes(IEndpointRouteBuilder app)
 	{
@@ -32,9 +32,9 @@ public class DocumentsEndpoints : ICarterModule
 	}
 
 	public async Task<IResult> CreateOrders(
-		[FromBody]CreateDocumentRequest request,
-		[FromServices] IMediator mediator)
-		=> await mediator.Send(new CreateDocumentCommand(request))
+		[FromServices] IMediator mediator,
+		[FromBody]CreateOrderRequest request)
+		=> await mediator.Send(new CreateOrderCommand(request))
 			.ContinueWith(_ => Results.Ok("Order created successfully."));
 
 	public async Task<IResult> UpdateOrders()

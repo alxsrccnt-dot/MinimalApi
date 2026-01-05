@@ -1,7 +1,10 @@
-﻿using Application.Common;
+﻿using Application.Commands.BusinessPartners.Create;
+using Application.Commands.BusinessPartners.Update;
+using Application.Common;
 using Application.Queries.BusinessPartners.Read;
 using Carter;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MainApi.Endpoints;
 
@@ -42,14 +45,17 @@ public class BusinessPartnersEndpoints : ICarterModule
 
 		return Results.Ok(paginedDto);
 	}
-
-	public async Task<IResult> AddBusinessPartners(IMediator mediator)
+	public async Task<IResult> AddBusinessPartners([FromServices] IMediator mediator,
+		[FromBody] CreateBusinessPartnerRequest request)
 	{
-		return Results.Ok("New bussines partener added.");
+		await mediator.Send(new CreateBusinessPartnerCommand(request));
+		return Results.Ok("New business partner added.");
 	}
 
-	public async Task<IResult> UpdateBusinessPartners(IMediator mediator)
+	public async Task<IResult> UpdateBusinessPartners([FromServices] IMediator mediator,
+		[FromBody] UpdateBusinessPartnerRequest request)
 	{
-		return Results.Ok("Bussines partener updated.");
+		await mediator.Send(new UpdateBusinessPartnerCommand(request));
+		return Results.Ok("Business partner updated.");
 	}
 }

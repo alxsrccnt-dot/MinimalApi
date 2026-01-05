@@ -2,8 +2,7 @@
 
 namespace Application.Commands.Categories.Update;
 
-public class UpdateCategoryRequest(string title) : BaseCreateOrUpdateCategoryRequest(title)
+public class UpdateCategoryRequest(int Id, string title) : CreateOrUpdateCategoryRequest(title)
 {
-	public int Id { get; set; }
-	public bool IsActive { get; set; }
+	public int Id { get; init; } = Id;
 }

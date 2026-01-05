@@ -1,10 +1,10 @@
 ﻿namespace Application.Commands.Products.Common;
 
-public class BaseCreateOrUpdateProductRequest
+public class BaseCreateOrUpdateProductRequest(string code, string title, string description, int price, int categoryId)
 {
-	public string Code { get; set; } = null!;
-	public string Title { get; set; } = null!;
-	public string Description { get; set; } = null!;
-	public int Price { get; set; }
-	public int CategoryId { get; set; }
+	public string Code { get; init; } = code;
+	public string Title { get; init; } = title;
+	public string Description { get; init; } = description;
+	public int Price { get; init; } = price;
+	public int CategoryId { get; init; } = categoryId;
 }

@@ -1,4 +1,5 @@
 ﻿using Application.Commands.Products.Create;
+using Application.Commands.Products.Update;
 using Application.Common;
 using Application.Queries.Items.Read;
 using Carter;
@@ -21,11 +22,11 @@ public class ProductsEndpoint : ICarterModule
 			.AllowAnonymous();
 			//.RequireAuthorization();
 
-		adminGroup.MapPost("", AddItem)
-			.WithName(nameof(AddItem));
+		adminGroup.MapPost("", AddProduct)
+			.WithName(nameof(AddProduct));
 
-		adminGroup.MapPut("", UpdateItem)
-			.WithName(nameof(UpdateItem));
+		adminGroup.MapPut("", UpdateProduct)
+			.WithName(nameof(UpdateProduct));
 	}
 
 	public async Task<IResult> GetItems([FromServices] IMediator mediator,
@@ -49,15 +50,17 @@ public class ProductsEndpoint : ICarterModule
 		return Results.Ok(paginedDto);
 	}
 
-	public async Task<IResult> AddItem([FromServices] IMediator mediator,
+	public async Task<IResult> AddProduct([FromServices] IMediator mediator,
 		[FromBody]CreateProductRequest request)
 	{
 		await mediator.Send(new CreateProductCommand(request));
-		return Results.Ok("Item was added.");
+		return Results.Ok("The product was added.");
 	}
 
-	public async Task<IResult> UpdateItem()
+	public async Task<IResult> UpdateProduct([FromServices] IMediator mediator,
+		[FromBody] UpdateProductRequest request)
 	{
-		return Results.Ok("Item was added.");
+		await mediator.Send(new UpdateProductCommand(request));
+		return Results.Ok("The product was updated.");
 	}
 }
