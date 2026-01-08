@@ -1,4 +1,4 @@
-﻿using Domain.Entities.Orders;
+﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -13,10 +13,6 @@ internal class OrderProfileConfiguration : IEntityTypeConfiguration<Order>
 			   .HasMaxLength(50)
 			   .IsRequired();
 		builder.Property(x => x.CreateAt)
-			   .IsRequired();
-
-		builder.Property(x => x.CreatedBy)
-			   .HasMaxLength(100)
 			   .IsRequired();
 
 		builder.HasOne(x => x.BusinessPartner)

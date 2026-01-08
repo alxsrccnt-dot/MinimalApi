@@ -1,5 +1,4 @@
 ﻿using Domain.Entities.Base;
-using Domain.Entities.Orders;
 
 namespace Domain.Entities;
 

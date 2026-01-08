@@ -1,8 +1,8 @@
 ﻿using Carter;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Application.Commands.Categories.Create;
-using Application.Commands.Categories.Update;
+using Application.Categories.Create;
+using Application.Categories.Update;
 
 namespace MainApi.Endpoints;
 

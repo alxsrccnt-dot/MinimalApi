@@ -1,8 +1,8 @@
 ﻿using Carter;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Application.Commands.Warehouses.Create;
-using Application.Commands.Warehouses.Update;
+using Application.Warehouses.Create;
+using Application.Warehouses.Update;
 
 namespace MainApi.Endpoints;
 

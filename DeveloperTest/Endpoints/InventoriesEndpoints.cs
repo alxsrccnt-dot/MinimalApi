@@ -1,8 +1,8 @@
 ﻿using Carter;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Application.Commands.Inventories.Create;
-using Application.Commands.Inventories.Update;
+using Application.Inventories.Create;
+using Application.Inventories.Update;
 
 namespace MainApi.Endpoints;
 

@@ -1,7 +1,7 @@
-﻿using Application.Commands.BusinessPartners.Create;
-using Application.Commands.BusinessPartners.Update;
+﻿using Application.BusinessPartners.Create;
+using Application.BusinessPartners.Read;
+using Application.BusinessPartners.Update;
 using Application.Common;
-using Application.Queries.BusinessPartners.Read;
 using Carter;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

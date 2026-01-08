@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Infrastructure.Repositories;
 
 namespace Infrastructure;
 
@@ -12,6 +13,7 @@ public static class DependencyInjection
 	public static IServiceCollection AddInfrastucture(this IServiceCollection services, IConfiguration config)
 	{
 		services.AddDatabaseContext(config);
+		services.AddRepositories();
 		
 		return services;
 	}
@@ -32,6 +34,15 @@ public static class DependencyInjection
 						errorNumbersToAdd: null);
 				});
 		});
+
+		return services;
+	}
+
+	private static IServiceCollection AddRepositories(this IServiceCollection services)
+	{
+		services.AddScoped(typeof(IReadRepository<>), typeof(ReadRepository<>));
+		services.AddScoped(typeof(ICreateRepository<>), typeof(CreateRepository<>));
+		services.AddScoped(typeof(IUpdateRepository<>), typeof(UpdateRepository<>));
 
 		return services;
 	}

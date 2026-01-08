@@ -22,6 +22,49 @@ namespace Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Domain.Entities.BasketInformation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("LastUpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastUpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserEmail")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserEmail");
+
+                    b.ToTable("BasketInformations");
+                });
+
             modelBuilder.Entity("Domain.Entities.BusinessPartner", b =>
                 {
                     b.Property<int>("Id")
@@ -47,7 +90,107 @@ namespace Infrastructure.Migrations
                     b.ToTable("BusinessPartners");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Orders.Order", b =>
+            modelBuilder.Entity("Domain.Entities.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastUpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastUpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("Domain.Entities.FavoriteItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("UserFavoriteId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserFavoriteId");
+
+                    b.ToTable("FavoriteItems");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Inventory", b =>
+                {
+                    b.Property<int>("PhysicalProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WarehouseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("PhysicalProductId", "WarehouseId");
+
+                    b.HasIndex("WarehouseId");
+
+                    b.ToTable("Inventories");
+                });
+
+            modelBuilder.Entity("Domain.Entities.License", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ExpirationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Key")
+                        .IsRequired()
+                        .HasMaxLength(26)
+                        .HasColumnType("nvarchar(26)");
+
+                    b.Property<int>("LicensedProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Key");
+
+                    b.HasIndex("LicensedProductId");
+
+                    b.ToTable("Licenses");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Order", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -63,8 +206,8 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime?>("LastUpdateDate")
                         .HasColumnType("datetime2");
@@ -82,7 +225,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Orders.OrderComment", b =>
+            modelBuilder.Entity("Domain.Entities.OrderComment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -119,7 +262,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("OrderComments");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Orders.OrderLine", b =>
+            modelBuilder.Entity("Domain.Entities.OrderLine", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -160,86 +303,7 @@ namespace Infrastructure.Migrations
                     b.UseTphMappingStrategy();
                 });
 
-            modelBuilder.Entity("Domain.Entities.Product.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreateAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastUpdateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LastUpdatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Product.Inventory", b =>
-                {
-                    b.Property<int>("PhysicalProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WarehouseId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("PhysicalProductId", "WarehouseId");
-
-                    b.HasIndex("WarehouseId");
-
-                    b.ToTable("Inventories");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Product.License", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("ExpirationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Key")
-                        .IsRequired()
-                        .HasMaxLength(26)
-                        .HasColumnType("nvarchar(26)");
-
-                    b.Property<int>("LicensedProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Key");
-
-                    b.HasIndex("LicensedProductId");
-
-                    b.ToTable("Licenses");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Product.Product", b =>
+            modelBuilder.Entity("Domain.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -300,7 +364,7 @@ namespace Infrastructure.Migrations
                     b.UseTphMappingStrategy();
                 });
 
-            modelBuilder.Entity("Domain.Entities.Product.Rating", b =>
+            modelBuilder.Entity("Domain.Entities.Rating", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -339,7 +403,44 @@ namespace Infrastructure.Migrations
                     b.ToTable("Raitings");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Product.Warehouse", b =>
+            modelBuilder.Entity("Domain.Entities.UserFavorite", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("LastUpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastUpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("UserEmail")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserEmail");
+
+                    b.ToTable("UserFavorites");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Warehouse", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -357,9 +458,9 @@ namespace Infrastructure.Migrations
                     b.ToTable("Warehouses");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Orders.LicensedOrderLine", b =>
+            modelBuilder.Entity("Domain.Entities.LicensedOrderLine", b =>
                 {
-                    b.HasBaseType("Domain.Entities.Orders.OrderLine");
+                    b.HasBaseType("Domain.Entities.OrderLine");
 
                     b.Property<int>("LicensedProductID")
                         .HasColumnType("int");
@@ -369,9 +470,9 @@ namespace Infrastructure.Migrations
                     b.HasDiscriminator().HasValue("LicensedOrderLine");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Orders.PhysicalOrderline", b =>
+            modelBuilder.Entity("Domain.Entities.PhysicalOrderline", b =>
                 {
-                    b.HasBaseType("Domain.Entities.Orders.OrderLine");
+                    b.HasBaseType("Domain.Entities.OrderLine");
 
                     b.Property<int>("PhysicalProductId")
                         .HasColumnType("int");
@@ -384,62 +485,59 @@ namespace Infrastructure.Migrations
                     b.HasDiscriminator().HasValue("PhysicalOrderline");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Product.LicensedProduct", b =>
+            modelBuilder.Entity("Domain.Entities.LicensedProduct", b =>
                 {
-                    b.HasBaseType("Domain.Entities.Product.Product");
+                    b.HasBaseType("Domain.Entities.Product");
 
                     b.HasDiscriminator().HasValue("LicensedProduct");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Product.PhysicalProduct", b =>
+            modelBuilder.Entity("Domain.Entities.PhysicalProduct", b =>
                 {
-                    b.HasBaseType("Domain.Entities.Product.Product");
+                    b.HasBaseType("Domain.Entities.Product");
 
                     b.HasDiscriminator().HasValue("PhysicalProduct");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Orders.Order", b =>
+            modelBuilder.Entity("Domain.Entities.BasketInformation", b =>
                 {
-                    b.HasOne("Domain.Entities.BusinessPartner", "BusinessPartner")
-                        .WithMany("Orders")
-                        .HasForeignKey("BusinessPartnerId")
+                    b.HasOne("Domain.Entities.Product", "Product")
+                        .WithMany("BasketsInformation")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("BusinessPartner");
+                    b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Orders.OrderComment", b =>
+            modelBuilder.Entity("Domain.Entities.FavoriteItem", b =>
                 {
-                    b.HasOne("Domain.Entities.Orders.Order", "Order")
-                        .WithOne("Comment")
-                        .HasForeignKey("Domain.Entities.Orders.OrderComment", "OrderID")
+                    b.HasOne("Domain.Entities.Product", "Product")
+                        .WithMany("FavoritesItem")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("Order");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Orders.OrderLine", b =>
-                {
-                    b.HasOne("Domain.Entities.Orders.Order", "Order")
-                        .WithMany("OrderLines")
-                        .HasForeignKey("OrderID")
+                    b.HasOne("Domain.Entities.UserFavorite", "UserFavorite")
+                        .WithMany("FavoriteItems")
+                        .HasForeignKey("UserFavoriteId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("Order");
+                    b.Navigation("Product");
+
+                    b.Navigation("UserFavorite");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Product.Inventory", b =>
+            modelBuilder.Entity("Domain.Entities.Inventory", b =>
                 {
-                    b.HasOne("Domain.Entities.Product.PhysicalProduct", "PhysicalProduct")
+                    b.HasOne("Domain.Entities.PhysicalProduct", "PhysicalProduct")
                         .WithMany("Inventories")
                         .HasForeignKey("PhysicalProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.Product.Warehouse", "Warehouse")
+                    b.HasOne("Domain.Entities.Warehouse", "Warehouse")
                         .WithMany("Inventories")
                         .HasForeignKey("WarehouseId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -450,9 +548,9 @@ namespace Infrastructure.Migrations
                     b.Navigation("Warehouse");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Product.License", b =>
+            modelBuilder.Entity("Domain.Entities.License", b =>
                 {
-                    b.HasOne("Domain.Entities.Product.LicensedProduct", "LicensedProduct")
+                    b.HasOne("Domain.Entities.LicensedProduct", "LicensedProduct")
                         .WithMany("Licenses")
                         .HasForeignKey("LicensedProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -461,9 +559,42 @@ namespace Infrastructure.Migrations
                     b.Navigation("LicensedProduct");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Product.Product", b =>
+            modelBuilder.Entity("Domain.Entities.Order", b =>
                 {
-                    b.HasOne("Domain.Entities.Product.Category", "Category")
+                    b.HasOne("Domain.Entities.BusinessPartner", "BusinessPartner")
+                        .WithMany("Orders")
+                        .HasForeignKey("BusinessPartnerId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("BusinessPartner");
+                });
+
+            modelBuilder.Entity("Domain.Entities.OrderComment", b =>
+                {
+                    b.HasOne("Domain.Entities.Order", "Order")
+                        .WithOne("Comment")
+                        .HasForeignKey("Domain.Entities.OrderComment", "OrderID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("Domain.Entities.OrderLine", b =>
+                {
+                    b.HasOne("Domain.Entities.Order", "Order")
+                        .WithMany("OrderLines")
+                        .HasForeignKey("OrderID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Product", b =>
+                {
+                    b.HasOne("Domain.Entities.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -472,9 +603,9 @@ namespace Infrastructure.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Product.Rating", b =>
+            modelBuilder.Entity("Domain.Entities.Rating", b =>
                 {
-                    b.HasOne("Domain.Entities.Product.Product", "Product")
+                    b.HasOne("Domain.Entities.Product", "Product")
                         .WithMany("Ratings")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -483,9 +614,9 @@ namespace Infrastructure.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Orders.LicensedOrderLine", b =>
+            modelBuilder.Entity("Domain.Entities.LicensedOrderLine", b =>
                 {
-                    b.HasOne("Domain.Entities.Product.LicensedProduct", "LicensedProduct")
+                    b.HasOne("Domain.Entities.LicensedProduct", "LicensedProduct")
                         .WithMany("LicensedOrderLines")
                         .HasForeignKey("LicensedProductID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -494,9 +625,9 @@ namespace Infrastructure.Migrations
                     b.Navigation("LicensedProduct");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Orders.PhysicalOrderline", b =>
+            modelBuilder.Entity("Domain.Entities.PhysicalOrderline", b =>
                 {
-                    b.HasOne("Domain.Entities.Product.PhysicalProduct", "PhysicalProduct")
+                    b.HasOne("Domain.Entities.PhysicalProduct", "PhysicalProduct")
                         .WithMany("PhysicalOrderlines")
                         .HasForeignKey("PhysicalProductId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -510,36 +641,45 @@ namespace Infrastructure.Migrations
                     b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Orders.Order", b =>
+            modelBuilder.Entity("Domain.Entities.Category", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Order", b =>
                 {
                     b.Navigation("Comment");
 
                     b.Navigation("OrderLines");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Product.Category", b =>
+            modelBuilder.Entity("Domain.Entities.Product", b =>
                 {
-                    b.Navigation("Products");
-                });
+                    b.Navigation("BasketsInformation");
 
-            modelBuilder.Entity("Domain.Entities.Product.Product", b =>
-                {
+                    b.Navigation("FavoritesItem");
+
                     b.Navigation("Ratings");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Product.Warehouse", b =>
+            modelBuilder.Entity("Domain.Entities.UserFavorite", b =>
+                {
+                    b.Navigation("FavoriteItems");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Warehouse", b =>
                 {
                     b.Navigation("Inventories");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Product.LicensedProduct", b =>
+            modelBuilder.Entity("Domain.Entities.LicensedProduct", b =>
                 {
                     b.Navigation("LicensedOrderLines");
 
                     b.Navigation("Licenses");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Product.PhysicalProduct", b =>
+            modelBuilder.Entity("Domain.Entities.PhysicalProduct", b =>
                 {
                     b.Navigation("Inventories");
 

@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Entities\Orders\" />
+    <Folder Include="Entities\Products\" />
+  </ItemGroup>
+
 </Project>

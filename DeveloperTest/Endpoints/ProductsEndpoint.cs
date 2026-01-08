@@ -1,7 +1,7 @@
-﻿using Application.Commands.Products.Create;
-using Application.Commands.Products.Update;
-using Application.Common;
-using Application.Queries.Items.Read;
+﻿using Application.Common;
+using Application.Products.Create;
+using Application.Products.Read;
+using Application.Products.Update;
 using Carter;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

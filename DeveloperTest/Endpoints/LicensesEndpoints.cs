@@ -1,8 +1,8 @@
 ﻿using Carter;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Application.Commands.Licenses.Create;
-using Application.Commands.Licenses.Update;
+using Application.Licenses.Update;
+using Application.Licenses.Create;
 
 namespace MainApi.Endpoints;
 

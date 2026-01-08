@@ -1,5 +1,4 @@
-﻿using Application.Commands.Orders.Create;
-using Application.Commands.Orders.Delete;
+﻿using Application.Orders.Create;
 using Carter;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -43,6 +42,7 @@ public class OrdersEndpoints : ICarterModule
 	}
 
 	public async Task<IResult> DeleteOrders(int id, [FromServices] IMediator mediator)
-		=> await mediator.Send(new DeleteOrderCommand(id))
-			.ContinueWith(_ => Results.Ok($"Order with Id {id} deleted successfully."));
+	{
+		return Results.Ok("Orders retrieved successfully.");
+	}
 }

@@ -24,8 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\Orders\Update\" />
-    <Folder Include="DTOs\" />
+    <Folder Include="Orders\Update\" />
   </ItemGroup>
 
 </Project>
