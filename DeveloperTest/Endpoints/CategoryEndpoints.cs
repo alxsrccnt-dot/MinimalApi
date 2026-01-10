@@ -11,7 +11,7 @@ public class CategoryEndpoints : ICarterModule
 	public void AddRoutes(IEndpointRouteBuilder app)
 	{
 		var adminGroup = app.MapGroup("/api/admin/categories")
-			.AllowAnonymous();
+			.RequireAuthorization("admins.manage");
 
 		adminGroup.MapPost("", AddCategory)
 			.WithName(nameof(AddCategory));

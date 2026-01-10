@@ -11,7 +11,7 @@ public class WarehousesEndpoints : ICarterModule
 	public void AddRoutes(IEndpointRouteBuilder app)
 	{
 		var adminGroup = app.MapGroup("/api/admin/warehouses")
-			.AllowAnonymous();
+			.RequireAuthorization("admins.manage");
 
 		adminGroup.MapPost("", AddWarehouse)
 			.WithName(nameof(AddWarehouse));

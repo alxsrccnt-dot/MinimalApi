@@ -11,7 +11,7 @@ public class InventoriesEndpoints : ICarterModule
 	public void AddRoutes(IEndpointRouteBuilder app)
 	{
 		var adminGroup = app.MapGroup("/api/admin/inventories")
-			.AllowAnonymous();
+			.RequireAuthorization("admins.manage");
 
 		adminGroup.MapPost("", AddInventory)
 			.WithName(nameof(AddInventory));

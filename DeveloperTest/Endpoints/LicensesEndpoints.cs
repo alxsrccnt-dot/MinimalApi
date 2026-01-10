@@ -11,7 +11,7 @@ public class LicensesEndpoints : ICarterModule
 	public void AddRoutes(IEndpointRouteBuilder app)
 	{
 		var adminGroup = app.MapGroup("/api/admin/licenses")
-			.AllowAnonymous();
+			.RequireAuthorization("admins.manage");
 
 		adminGroup.MapPost("", AddLicense)
 			.WithName(nameof(AddLicense));

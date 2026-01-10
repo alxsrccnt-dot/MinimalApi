@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Infrastructure\Common\**" />
+    <Content Remove="Infrastructure\Common\**" />
+    <EmbeddedResource Remove="Infrastructure\Common\**" />
+    <None Remove="Infrastructure\Common\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Carter" Version="8.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.22" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.22">
@@ -21,10 +28,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Infrastructure\Common\" />
   </ItemGroup>
 
 </Project>

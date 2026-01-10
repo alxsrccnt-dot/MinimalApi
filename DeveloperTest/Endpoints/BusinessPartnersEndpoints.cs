@@ -4,6 +4,7 @@ using Application.BusinessPartners.Update;
 using Application.Common;
 using Carter;
 using MediatR;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MainApi.Endpoints;
@@ -18,10 +19,13 @@ public class BusinessPartnersEndpoints : ICarterModule
 		group.MapGet("", GetBusinessPartners)
 			.WithName(nameof(GetBusinessPartners));
 
-		group.MapPost("", AddBusinessPartners)
+		var adminGroup = app.MapGroup("/api/admin/business-partners")
+			.RequireAuthorization("admins.manage");
+
+		adminGroup.MapPost("", AddBusinessPartners)
 			.WithName(nameof(AddBusinessPartners));
 
-		group.MapPut("", UpdateBusinessPartners)
+		adminGroup.MapPut("", UpdateBusinessPartners)
 			.WithName(nameof(UpdateBusinessPartners));
 	}
 

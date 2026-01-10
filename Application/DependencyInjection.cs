@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Application.Common.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -12,7 +13,15 @@ public static class DependencyInjection
 		{
 			cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
 		});
+		services.AddServicesCollection();
 
+		return services;
+	}
+
+	private static IServiceCollection AddServicesCollection(this IServiceCollection services)
+	{
+		services.AddHttpContextAccessor();
+		services.AddScoped(typeof(ICurrentUser), typeof(CurrentUser));
 		return services;
 	}
 }

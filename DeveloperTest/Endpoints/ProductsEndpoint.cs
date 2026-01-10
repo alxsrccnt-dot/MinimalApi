@@ -19,8 +19,7 @@ public class ProductsEndpoint : ICarterModule
 			.WithName(nameof(GetItems));
 
 		var adminGroup = app.MapGroup("/api/admin/products")
-			.AllowAnonymous();
-			//.RequireAuthorization();
+			.RequireAuthorization("admins.manage");
 
 		adminGroup.MapPost("", AddProduct)
 			.WithName(nameof(AddProduct));

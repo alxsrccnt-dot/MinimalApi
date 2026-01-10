@@ -73,6 +73,11 @@ public static class ServiceCollectionExtensions
 		services.AddAuthorization(options =>
 		{
 			options.FallbackPolicy = options.DefaultPolicy;
+			options.AddPolicy("admins.manage", policy =>
+				policy.RequireClaim("scope", "admins.manage"));
+
+			options.AddPolicy("admins.read", policy =>
+				policy.RequireClaim("scope", "admins.read"));
 		});
 
 		return services;

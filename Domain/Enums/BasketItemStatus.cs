@@ -2,6 +2,6 @@
 
 public enum BasketItemStatus
 {
-	Added,
-	Selected
+	Selected,
+	Added
 }
