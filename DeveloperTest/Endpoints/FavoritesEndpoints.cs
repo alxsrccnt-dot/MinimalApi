@@ -17,6 +17,9 @@ public class FavoritesEndpoints : ICarterModule
 		group.MapGet("", GetUserFavoritesCollection)
 			.WithName(nameof(GetUserFavoritesCollection));
 
+		group.MapPost("", AddFavoriteWithCollection)
+			.WithName(nameof(AddFavoriteWithCollection));
+
 		group.MapPost("", AddFavorite)
 			.WithName(nameof(AddFavorite));
 
@@ -33,6 +36,12 @@ public class FavoritesEndpoints : ICarterModule
 	public async Task<IResult> AddFavorite([FromServices] IMediator mediator, [FromBody] CreateFavoriteRequest request)
 	{
 		await mediator.Send(new CreateFavoriteCommand(request));
+		return Results.Ok("Favorite added.");
+	}
+
+	public async Task<IResult> AddFavoriteWithCollection([FromServices] IMediator mediator, [FromBody] CreateFavoriteWithCollectionCommand request)
+	{
+		await mediator.Send(new CreateFavoriteWithCollectionCommand(request));
 		return Results.Ok("Favorite added.");
 	}
 

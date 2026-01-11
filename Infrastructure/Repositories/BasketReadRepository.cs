@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.Enums;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,4 +12,12 @@ internal class BasketReadRepository(ApplicationDbContext context) : IBasketReadR
 
 	public async Task<List<BasketInformation>> GetBasketByUserAsync(string userEmail, CancellationToken cancellationToken)
 		=> await context.BasketInformations.AsNoTracking().Include(b => b.Product).Where(b => b.UserEmail == userEmail).ToListAsync(cancellationToken);
+
+	public async Task<IEnumerable<Product>> GetSelectedProductInBasketAsync(string userEmail, CancellationToken cancellationToken)
+		 => await context.BasketInformations
+				.AsNoTracking()
+				.Include(b => b.Product)
+				.Where(b => b.UserEmail == userEmail && b.Status == BasketItemStatus.Selected)
+				.Select(b => b.Product)
+				.ToListAsync(cancellationToken);
 }

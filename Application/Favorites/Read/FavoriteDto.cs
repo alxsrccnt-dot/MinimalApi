@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.Entities;
 
-namespace Application.Favorites.Read
+namespace Application.Favorites.Read;
+
+public class FavoriteDto(FavoriteItem favoriteItem)
 {
-	internal class FavoriteDto
-	{
-	}
+	public int Id{ get; set; } = favoriteItem.ProductId;
+	public string Title{ get; set; } = favoriteItem.Product.Title;
 }

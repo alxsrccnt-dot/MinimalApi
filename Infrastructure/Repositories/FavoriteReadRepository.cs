@@ -9,7 +9,7 @@ internal class FavoriteReadRepository(ApplicationDbContext context) : IFavoriteR
 	public async Task<IEnumerable<UserFavorite>> GetUserFavouritesAsync(string userEmail, CancellationToken cancellationToken = default)
 		=> await context.UserFavorites
 			.Include(uf => uf.FavoriteItems)
-			.ThenInclude(fi => fi.Product)
+			.ThenInclude(fi => fi.Product).Take(5)
 			.AsNoTracking()
 			.Where(uf => uf.UserEmail == userEmail)
 			.ToListAsync(cancellationToken);
