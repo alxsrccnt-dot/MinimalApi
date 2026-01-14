@@ -41,6 +41,7 @@ public static class DependencyInjection
 	private static IServiceCollection AddRepositories(this IServiceCollection services)
 	{
 		services.AddScoped(typeof(IReadRepository<>), typeof(ReadRepository<>));
+		services.AddScoped(typeof(IProductReadRepositroy), typeof(ProductReadRepositroy));
 		services.AddScoped(typeof(IBasketReadRepository), typeof(BasketReadRepository));
 		services.AddScoped(typeof(IFavoriteReadRepository), typeof(FavoriteReadRepository));
 		services.AddScoped(typeof(ICreateRepository<>), typeof(CreateRepository<>));

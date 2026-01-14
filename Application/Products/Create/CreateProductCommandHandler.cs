@@ -1,5 +1,6 @@
 ﻿using Application.Products.Common;
 using Domain.Entities;
+using Domain.Enums;
 using Infrastructure.Repositories;
 using MediatR;
 using System.ComponentModel.DataAnnotations;

@@ -39,7 +39,7 @@ public class FavoritesEndpoints : ICarterModule
 		return Results.Ok("Favorite added.");
 	}
 
-	public async Task<IResult> AddFavoriteWithCollection([FromServices] IMediator mediator, [FromBody] CreateFavoriteWithCollectionCommand request)
+	public async Task<IResult> AddFavoriteWithCollection([FromServices] IMediator mediator, [FromBody] CreateFavoritewithCollectionRequest request)
 	{
 		await mediator.Send(new CreateFavoriteWithCollectionCommand(request));
 		return Results.Ok("Favorite added.");

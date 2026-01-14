@@ -1,3 +1,3 @@
 ﻿namespace Application.Orders.Create;
 
-public record CreateOrderRequest(string BPCode, int basketId);
+public record CreateOrderRequest(int BussinesPartenerId);

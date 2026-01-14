@@ -1,7 +1,6 @@
 using Domain.Entities;
 using Infrastructure.Repositories;
 using MediatR;
-using System.ComponentModel.DataAnnotations;
 
 namespace Application.Basket.Create;
 
@@ -23,9 +22,6 @@ public class CreateBasketItemCommandHandler(IBasketReadRepository basketReadRepo
 		}
 		else
 		{
-			if (r.Quantity == 0)
-				await deleteRepository.DeleteAsync(existing, cancellationToken);
-
 			existing.Quantity += r.Quantity;
 			await updateRepository.UpdateAsync(existing);
 		}

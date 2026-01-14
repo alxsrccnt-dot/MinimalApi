@@ -1,4 +1,4 @@
-﻿namespace Application.Products.Common;
+﻿namespace Domain.Enums;
 
 public enum ProductType
 {

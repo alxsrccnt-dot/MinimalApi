@@ -4,4 +4,8 @@ public class LicensedProduct(string code, string title, string description, int 
 {
 	public ICollection<License> Licenses { get; set; } = [];
 	public ICollection<LicensedOrderLine> LicensedOrderLines { get; set; } = [];
+	public ICollection<BasketInformation> BasketInformations { get; set; } = [];
+
+	public override bool IsAvailable()
+		=> Licenses.Count > 0;
 }

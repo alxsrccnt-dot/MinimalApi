@@ -4,6 +4,13 @@ namespace Domain.Entities;
 
 public class Order : BaseEntity<int>
 {
+	public Order(int businessPartnerId, IList<OrderLine> orderLines)
+	{
+		BusinessPartnerId = businessPartnerId;
+		OrderLines = orderLines;
+		SetTotalAmount();
+	}
+
 	public int BusinessPartnerId { get; set; }
 	public BusinessPartner? BusinessPartner { get; set; }
 	

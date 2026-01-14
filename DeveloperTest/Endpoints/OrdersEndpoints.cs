@@ -30,9 +30,7 @@ public class OrdersEndpoints : ICarterModule
 		return Results.Ok("Orders retrieved successfully.");
 	}
 
-	public async Task<IResult> CreateOrders(
-		[FromServices] IMediator mediator,
-		[FromBody]CreateOrderRequest request)
+	public async Task<IResult> CreateOrders([FromServices] IMediator mediator, [FromBody]CreateOrderRequest request)
 		=> await mediator.Send(new CreateOrderCommand(request))
 			.ContinueWith(_ => Results.Ok("Order created successfully."));
 

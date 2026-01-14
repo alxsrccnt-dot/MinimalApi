@@ -4,4 +4,8 @@ public class PhysicalProduct(string code, string title, string description, int 
 {
 	public ICollection<PhysicalOrderline> PhysicalOrderlines { get; set; } = [];
 	public ICollection<Inventory> Inventories { get; set; } = [];
+	public ICollection<BasketInformation> BasketInformations { get; set; } = [];
+
+	public override bool IsAvailable()
+		=> Inventories.Sum(i => i.Quantity) > 0;
 }

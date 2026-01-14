@@ -1,4 +1,5 @@
 ﻿using Application.Products.Common;
+using Domain.Enums;
 
 namespace Application.Products.Create;
 

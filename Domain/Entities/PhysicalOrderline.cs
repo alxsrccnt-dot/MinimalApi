@@ -1,6 +1,6 @@
 ﻿namespace Domain.Entities;
 
-public class PhysicalOrderline : OrderLine
+public class  PhysicalOrderline : OrderLine
 {
 	public int Quantity { get; set; }
 	public int PhysicalProductId { get; set; }
